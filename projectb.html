@@ -1,0 +1,37 @@
+<script>
+
+let shift = Number(prompt("Enter shift"));
+
+let str = prompt("Enter your text");
+
+let newStr = "";
+let letterCode;
+
+shift = shift%26;
+
+for (let i=0; i<str.length; i++) {
+  letterCode = str.charCodeAt(i); 
+  if (str.charCodeAt(i) >= 97 && str.charCodeAt(i) <= 122) {  //lowercase
+    letterCode = str.charCodeAt(i) + shift; 
+    if (letterCode < 97) { 
+	  letterCode = letterCode + 26;
+	}
+	else if (letterCode > 122) { 
+	  letterCode = letterCode - 26;
+	}
+  }
+  else if (str.charCodeAt (i) >= 65 && str.charCodeAt (i) <= 90) { //uppercase
+    letterCode = str.charCodeAt(i) + shift; 
+    if (letterCode < 65) { 
+	  letterCode = letterCode + 26;
+	}
+	else if (letterCode > 90) { 
+	  letterCode = letterCode - 26;
+	}  
+  }
+  newStr = newStr + String.fromCharCode(letterCode);
+
+}
+alert(newStr);
+
+</script>
