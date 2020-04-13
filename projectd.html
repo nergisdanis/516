@@ -1,0 +1,14 @@
+<script>
+
+let myString = prompt("Enter a sentence");
+
+let replacedString = myString.replace(/([aeiouy]+)/g, "aig$1");
+
+let replacedString2 = replacedString.replace(/([aeiouy])([bcdfghjklmnpqrstvwxz]+)(aige)\b/g, "$1$2e");
+
+alert(replacedString2);
+
+</script>
+
+
+
