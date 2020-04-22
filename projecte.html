@@ -10,11 +10,57 @@ function process() {
   // get input text, put it in the variable "x"
   let x = document.getElementById("input").value;
   
-  // do some processing
-  // replace this line with what you need to do for the assignment
-  let y = x.toLowerCase();
-
-  // populate the output text box with the value of the variable "y"
+  // convert to uppercase, replace punctuation with white space
+  // trim the white space and split according to white space
+  let str = x.toUpperCase().replace(/\W/g," ").trim().split(/\s+/);
+  
+  // get number of tokens
+  let numTokens = str.length;
+   
+  // create an empty list for types
+  let typeList = {};
+  
+  // count frequency of each type
+  for (let i=0;i<numTokens;i++){
+	if(typeList[str[i]]==undefined){  // counting first occurance
+	  typeList[str[i]] = 1;
+	} 
+	else{ // counting repeated occurances
+      typeList[str[i]] = typeList[str[i]] + 1;
+	}
+  }
+  
+  // create an empty array of object as a dictionary for words and their frequencies
+  let dict = [];
+  
+  // function to add an entry to the dictionary (from textbook - chapter 4)
+  function addEntry(word, freq) {
+    dict.push({word, freq});
+  }
+  
+  // add all types to the dictionary with frequencies
+  for (k in typeList){
+    addEntry(k, typeList[k]);
+  }
+  
+  // sort words in dictionary by their frequency values
+  dict.sort(function(a, b){return b.freq - a.freq});
+  
+  // get number of types
+  numTypes = dict.length;
+  
+  // calculate and add TTR into the last line of the dictionary 
+  addEntry("TTR", numTypes/numTokens);
+  
+  // create an empty string for output
+  let y = "";
+   
+  // add dictionary items to the string
+  for (i=0;i<=numTypes;i++){
+     y = y + dict[i].word.toString() + " : " + dict[i].freq.toString() + "\n";
+  }
+  
+  // populate the output text box with the value of the variable "dict"
   document.getElementById("output").value = y;
 }
 
