@@ -1,0 +1,76 @@
+<script>
+
+let scoreTable = {//this will be updated based on users' answer: if incorrect: -1; if correct: +1
+  "at": 0,
+  "with": 0,
+  "to": 0,
+  "through":0,
+  "by": 0,
+};  
+
+let prepDatabase = {  
+  "at": [
+  "He is waiting at the bus stop", 
+  "I am mad at you", 
+  "Where you at?", 
+  "We are at a crossroads", 
+  "I am at my wit's end"
+  ], 
+  "with": [
+  "I was angry with him", 
+  "I cannot cope with this class",
+  "The teacher was disappinted with his performance", 
+  "You should wipe the area with a damp cloth", 
+  "Come to class with a paper and a pencil"
+  ],
+  "to": [
+  "He didn't come to school today",
+  "Adjust the AC to the desired temperature",
+  "I turned off the lights to relax my eyes",
+  "to the wilderness he drove",
+  "to get the latest updates, please subscribe"
+  ],
+  "through": [
+  "I hiked through the forest",
+  "I looked through the materials, but couldn't find it",
+  "I submitted the paper, but it didn't go through",
+  "The ball went through the net",
+  "Could you put me through to the president's office?"
+  ],
+  "by": [
+  "I came by this article yesterday, and it's really fun!",
+  "I usually go to school by bus",
+  "You have to run it by the head of department",
+  "by your leave, gentlemen!",
+  "You can condense it down by using a prepositional phrase"
+  ],
+};
+//we create a while loop so that the user is continously prompted new sentences
+while(true) {
+  //we take "at" as the worst preposition for a start
+  let worstPrep = "at";
+  //we adjust worst preposition to the one whose score is lower than "at"
+  for (let k in scoreTable) {
+    if (scoreTable[k] < scoreTable[worstPrep]) {
+    worstPrep = k;
+    }
+  }
+  //we select a random sentence from the database of the current worst preposition
+  //index must be between 0 and 4
+  index = Math.floor(Math.random()*5);
+  
+  //we show the randomly selected sentence from the worst preposition database and replace the preposition with three underscores
+  let prep = prompt(prepDatabase[worstPrep][index].replace(worstPrep, "___"));
+  //if the user inputs the correct preposition (which should be the same as the current worst preposition) the user gets the feedback "correct!"
+  if (worstPrep == prep)  {
+    scoreTable[worstPrep]++;
+    alert("correct!");
+  } 
+  //if the user inputs an incorrect preposition, the user is shown the full sentence with the worst preposition
+  else {
+    scoreTable[worstPrep]--;
+	alert(prepDatabase[worstPrep][index]);
+  }   
+}
+
+</script>
